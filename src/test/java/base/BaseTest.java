@@ -6,35 +6,35 @@ import org.testng.annotations.*;
 import utils.ConfigReader;
 import java.time.Duration;
 
-
-
 public class BaseTest {
 
-    protected WebDriver driver;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+
+    protected WebDriver getDriver() {
+        return driver.get();
+    }
 
     @Parameters("browser")
     @BeforeMethod
-    public void setup() {
+    public void setup(@Optional String browser) {
 
-        ConfigReader.initProperties();   // load config file
+        ConfigReader.initProperties();
 
-        String browser = ConfigReader.get("browser");
+        if (browser == null) {
+            browser = ConfigReader.get("browser");
+        }
 
-        driver = DriverFactory.getDriver(browser);
+        driver.set(DriverFactory.getDriver(browser));
+        getDriver().manage().window().maximize();
 
-        driver.manage().timeouts().implicitlyWait(
-                Duration.ofSeconds(Integer.parseInt(ConfigReader.get("timeout")))
-        );
-
-        driver.get(ConfigReader.get("url"));
+        getDriver().get(ConfigReader.get("url"));
     }
-
-
 
     @AfterMethod
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
+        if (getDriver() != null) {
+            getDriver().quit();
+            driver.remove();
         }
     }
 }
