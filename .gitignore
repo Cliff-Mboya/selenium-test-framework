@@ -36,3 +36,24 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+# Logs
+*.log
+logs/
+
+# Build output
+target/
+
+# Node dependencies
+node_modules/
+
+# System files
+.DS_Store
+
+# Accidental files
+*.zip
+*.exe
+*.dmg
+*.pdf
+*.png   # Only if screenshots are not part of repo assets
+
