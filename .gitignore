@@ -57,3 +57,6 @@ node_modules/
 *.pdf
 *.png   # Only if screenshots are not part of repo assets
 
+.idea/
+
+
