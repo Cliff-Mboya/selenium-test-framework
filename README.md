@@ -6,7 +6,7 @@ It supports **cross-browser execution (Chrome + Firefox)** using TestNG paramete
 ---
 
 ## ✅ Tech Stack
-- Java (recommended: 17+)
+- Java 17+
 - Maven
 - Selenium 4
 - TestNG
