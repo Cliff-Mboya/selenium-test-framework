@@ -7,25 +7,15 @@ import pages.LoginPage;
 import pages.ProductsPage;
 import utils.ConfigReader;
 
-public class LoginBusinessFlowTest extends BaseTest {
+public class ProductsPageTest extends BaseTest {
 
     @Test
-    public void shouldOpenLoginPageSuccessfully() {
-        LoginPage loginPage = new LoginPage(DriverManager.getDriver());
-        loginPage.open();
-    }
+    public void shouldDisplayProductsAfterLogin() {
 
-
-    @Test
-    public void shouldLoginSuccessfullyAndDisplayProductsPage() {
         String username = ConfigReader.get("username");
         String password = ConfigReader.get("password");
 
-       //Checking config.properties:
-        // System.out.println("CONFIG: " + username + " / " + password);
-
         LoginPage loginPage = new LoginPage(DriverManager.getDriver());
-
 
         ProductsPage productsPage = loginPage
                 .open()
