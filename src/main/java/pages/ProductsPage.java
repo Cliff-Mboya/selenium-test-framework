@@ -4,13 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 
 public class ProductsPage {
-    WebDriver driver;
-    WebDriverWait wait;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
@@ -18,20 +17,23 @@ public class ProductsPage {
     }
 
     // Locators
-    By productsTitle = By.cssSelector(".title");
-    By inventoryList = By.cssSelector(".inventory_list");
-    By cartIcon = By.cssSelector(".shopping_cart_link");
+    private By productsTitle = By.cssSelector(".title");
+    private By inventoryList = By.cssSelector(".inventory_list");
+    private By cartIcon = By.cssSelector(".shopping_cart_link");
 
-    public void assertUserIsOnProductsPage() {
-        Assert.assertTrue(driver.getCurrentUrl().contains("/inventory.html"), "URL mismatch");
+    public boolean isOnProductsPage() {
+        return driver.getCurrentUrl().contains("/inventory.html");
+    }
 
-        String titleText = wait.until(ExpectedConditions.visibilityOfElementLocated(productsTitle)).getText();
-        Assert.assertEquals(titleText, "Products", "Products page title mismatch");
+    public String getProductsTitleText() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(productsTitle)).getText();
+    }
 
-        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(inventoryList)).isDisplayed(),
-                "Inventory not visible");
+    public boolean isInventoryVisible() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(inventoryList)).isDisplayed();
+    }
 
-        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated(cartIcon)).isDisplayed(),
-                "Cart icon missing");
+    public boolean isCartIconVisible() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(cartIcon)).isDisplayed();
     }
 }
