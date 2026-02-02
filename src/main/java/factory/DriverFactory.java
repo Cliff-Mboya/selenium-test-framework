@@ -11,6 +11,8 @@ public class DriverFactory {
     public static WebDriver createDriver() {
 
         String browser = ConfigReader.getBrowser();
+        System.out.println("Selected browser: " + browser);
+
 
         switch (browser.toLowerCase()) {
             case "firefox":
